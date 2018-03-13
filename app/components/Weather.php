@@ -4,13 +4,14 @@
 class weather
 {
     const API_URL = 'http://api.openweathermap.org/data/2.5/';
-    const CACHE_DIR = __DIR__.'/../../var/cache/weather/';
+    const CACHE_DIR = 'weather';
 
     private $apiKey;
 
     public function __construct($apiKey)
     {
         $this->apiKey = $apiKey;
+        //throw new Exception('API-ключ неверный');
     }
 
     public function getWeatherByCity($city, $cache=false) {
@@ -22,7 +23,7 @@ class weather
 
         $url = self::API_URL . 'weather?' . http_build_query($param);
 
-        return $this->getResponse($url);
+        return $this->getResponse($url, $cache);
 
     }
 
