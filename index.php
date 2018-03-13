@@ -1,5 +1,7 @@
 <?php
 
+require_once 'vendor/autoload.php';
+require_once 'app/components/File.php';
 require_once 'app/controllers/Controller.php';
 
 define('PROJECT_NAME', 'SkillUp');
