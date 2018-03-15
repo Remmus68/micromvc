@@ -11,6 +11,11 @@ class File
         self::createFile($filename, $dir, $data);
     }
 
+    public static function log($data, $type) {
+        $filePath = self::ROOT_PATH . '/log/' . $type . '.log';
+
+    }
+
     public static function getCache($uniqDate, $prefix) {
         $filename=md5($uniqDate);
         $dir = '/var/cache/'. $prefix . '/';
@@ -22,9 +27,11 @@ class File
         }
     }
 
-    public static function createFile($fileName, $dir, $data) {
+    public static function createFile($fileName, $dir, $data, $mode='w') {
         self::createDir($dir);
-        $result=file_put_contents(self::ROOT_PATH .$dir.$fileName, $data);
+        $handle=fopen(self::ROOT_PATH .$dir.$fileName, $mode);
+        $result=fwrite($handle, $data);
+        fclose($handle);
         chmod(self::ROOT_PATH .$dir.$fileName, 0777);
         return $result;
     }
